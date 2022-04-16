@@ -1,2 +1,5 @@
 fastapi
 pydantic
+uvicorn[standard]
+pydantic[email]
+matplotlib

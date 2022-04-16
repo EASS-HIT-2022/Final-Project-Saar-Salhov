@@ -1,11 +1,13 @@
 from ast import And, If
 from collections import UserList
 from email import message
+from imp import reload
 from typing import List
 from fastapi import FastAPI
 import time
 from matplotlib.pyplot import flag
 from pydantic import BaseModel
+import uvicorn
 from product import Product
 from Receipts import Receipts
 from user import User
@@ -64,4 +66,7 @@ async def sighnIn(bUsername: str, bPassword: str):
         message = {"message":"Username or password is incorrect"}
     return message
 
+
+# if __name__ == "__main__":
+#     uvicorn.run("main:app", host="127.0.0.1", port=8083, log_level="info")
 
