@@ -2,7 +2,6 @@ from email import message
 from pydantic import BaseModel, EmailStr
 
 class User(BaseModel):
-    id: int
     firstName: str
     lastName: str
     email: EmailStr
