@@ -19,4 +19,3 @@ class User(BaseModel):
         if userName == self.userName:
             self.password = newPass
 
-

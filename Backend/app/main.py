@@ -1,9 +1,8 @@
 from ast import And, If
 from collections import UserList
 from email import message
-from imp import reload
 from typing import List
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import time
 from matplotlib.pyplot import flag
 from pydantic import BaseModel
@@ -29,11 +28,9 @@ async def register(bUser: User):
     flag = False
     for user in usersList:
         if user.userName == bUser.userName:
-            message =  {"message": "The username " +  user.userName + " is already exist"}
-            flag = True
-    if flag == False:
-        usersList.append(bUser)
-        message = {f"message": "The user " + bUser.firstName + " " + bUser.lastName + " was created successfuly"}
+            raise HTTPException(status_code=404, detail="The username " +  user.userName + " is already exist")
+    usersList.append(bUser)
+    message = {f"message": "The user " + bUser.firstName + " " + bUser.lastName + " was created successfuly"}
     return message
 
 @app.post("/changePassword")
@@ -49,11 +46,11 @@ async def changePassword(bUsername: str,bOldPass: str, bNewPass: str):
     if isPassChanged == True:
         return {"message": "Password Changed"}
     elif flag == False:
-        return {"message": "The username you entered is not exist"}
+        raise HTTPException(status_code=400, detail="The username you entered is not exist")
     else:
-        return {"message": "The old password is incorrect"}
+        raise HTTPException(status_code=400, detail="The old password is incorrect")
 
-@app.post("/sighnIn")
+@app.post("/signIn")
 async def sighnIn(bUsername: str, bPassword: str):
     flag = False
 
@@ -61,12 +58,10 @@ async def sighnIn(bUsername: str, bPassword: str):
         if user.userName == bUsername and user.password == bPassword:
             flag = True
             message = {"message":"You have successfully logged in"}
-            return message
     if flag == False:
-        message = {"message":"Username or password is incorrect"}
+        raise HTTPException(status_code=400, detail="Username or password is incorrect")
     return message
 
 
-# if __name__ == "__main__":
-#     uvicorn.run("main:app", host="127.0.0.1", port=8083, log_level="info")
+
 
