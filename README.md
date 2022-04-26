@@ -1,6 +1,6 @@
 # Final Project Saar Salhov
 
-### My system will save receipts of users by store using OCR.
+### My system will save receipts of users by store using OCR. the system is running on micro-services in Docker.
 
 ## Design
 ![image](https://user-images.githubusercontent.com/86562519/165363837-bc4a7cd4-b66b-47af-8739-30ab9a1615d1.png)
