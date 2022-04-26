@@ -43,7 +43,7 @@ def test_register_with_existing_username():
     assert response.json() == {"detail": "The username saarsalhov is already exist"}
 
 def test_change_password():
-    response = client.post("/changePassword",params={ 
+    response = client.put("/changePassword",params={ 
     "bUsername": "saarsalhov",
     "bOldPass": "Aa123456",
     "bNewPass": "Bb123456"
@@ -52,7 +52,7 @@ def test_change_password():
     assert response.json() == {"message": "Password Changed"}
 
 def test_change_password_bad_username():
-    response = client.post("/changePassword", params={
+    response = client.put("/changePassword", params={
 "bUsername": "saar",
 "bOldPass": "Aa123456",
 "bNewPass": "Bb123456"
@@ -61,7 +61,7 @@ def test_change_password_bad_username():
     assert response.json() == {"detail": "The username you entered is not exist"}
 
 def test_change_password_bad_old_pass():
-    response = client.post("/changePassword", params={
+    response = client.put("/changePassword", params={
 "bUsername": "saarsalhov",
 "bOldPass": "Aa1234",
 "bNewPass": "Bb123456"
@@ -85,7 +85,31 @@ def test_sign_in_with_bad_credentials():
     assert response.status_code == 400
     assert response.json() == {"detail": "Username or password is incorrect"}
 
+def test_get_receipts():
+    response = client.get("getAllReceipts/")
+    assert response.status_code == 200
+    assert response.json() == {'message': []}
 
-
-
-
+def test_add_receipts():
+    response = client.post("/uploadReceipt", json={
+  "storeName": "Renuar",
+  "products": [
+    {
+      "name": "T-shirt",
+      "color": "Red",
+      "price": 100
+    },
+        {
+      "name": "pants",
+      "color": "Green",
+      "price": 50
+    },
+        {
+      "name": "hat",
+      "color": "Blue",
+      "price": 20
+    }
+  ]
+})
+    assert response.status_code == 200
+    assert response.json() == {"message": "The recieipt uploaded successfully"}
