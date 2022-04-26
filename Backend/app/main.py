@@ -5,7 +5,7 @@ from typing import List
 from fastapi import FastAPI, HTTPException
 import time
 from matplotlib.pyplot import flag
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 import uvicorn
 from product import Product
 from Receipts import Receipts
@@ -14,6 +14,7 @@ from user import User
 
 app = FastAPI()
 usersList = []
+listOfReceipts = []
 
 @app.get("/")
 async def root():
@@ -25,7 +26,6 @@ async def getUsers():
 
 @app.post("/register")
 async def register(bUser: User):
-    flag = False
     for user in usersList:
         if user.userName == bUser.userName:
             raise HTTPException(status_code=404, detail="The username " +  user.userName + " is already exist")
@@ -33,7 +33,7 @@ async def register(bUser: User):
     message = {f"message": "The user " + bUser.firstName + " " + bUser.lastName + " was created successfuly"}
     return message
 
-@app.post("/changePassword")
+@app.put("/changePassword")
 async def changePassword(bUsername: str,bOldPass: str, bNewPass: str):
     flag = False
     isPassChanged = False
@@ -62,6 +62,14 @@ async def sighnIn(bUsername: str, bPassword: str):
         raise HTTPException(status_code=400, detail="Username or password is incorrect")
     return message
 
+@app.get("/getAllReceipts")
+async def getAllReceipts():
+    return {"message": listOfReceipts}
+
+@app.post("/uploadReceipt")
+async def uploadReceipt(bReceipt: Receipts):
+    listOfReceipts.append(bReceipt)
+    return {"message": "The recieipt uploaded successfully"}
 
 
 
