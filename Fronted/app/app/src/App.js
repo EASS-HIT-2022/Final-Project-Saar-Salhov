@@ -1,9 +1,9 @@
 import React from "react";
-import ToDoList from "./ToDoList";
+import HomePage from "./HomePage";
 
 function App() {
   return (
-    <ToDoList />
+    <HomePage />
   );
 }
 
