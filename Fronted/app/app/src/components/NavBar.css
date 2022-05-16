@@ -2,6 +2,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
 }
 
 .nav-items {
@@ -10,9 +11,10 @@ nav {
 }
 
 .nav-logo {
-    width: 70px;
+    width: 90px;
 }
 
 .nav-items > li {
     padding: 10px;
 }
+

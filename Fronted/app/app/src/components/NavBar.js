@@ -1,11 +1,12 @@
 import React from 'react'
+import homeLogo from '../images/logoWithNameNoBG.png'
 import './NavBar.css'
 
 export default function NavBar() {
   return (
     <header>
     <nav className="nav">
-        <img src="./logoWithName.png" className='nav-logo' alt="" />
+        <img src={homeLogo} className='nav-logo' alt="" />
         <ul className="nav-items">
             <li>Sign-in</li>
             <li>Sighn-Up</li>
