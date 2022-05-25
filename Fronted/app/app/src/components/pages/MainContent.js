@@ -7,7 +7,7 @@ export default function MainContent() {
     <div className="content">
       <h1>Welcome to RecieptIt</h1>
         <p>
-          This is the plaece you can save all your receipts!
+          This is the place you can save all your receipts!
         </p>
         <img src={logo} className='main-content-logo' alt=''></img>
     </div>
