@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 import "./LogIn.css";
 
+
+
 function LogIn() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
@@ -34,19 +36,20 @@ function LogIn() {
     // Find user login info
     const userData = database.find((user) => user.username === uname.value);
 
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
+
+      // Compare user info
+      if (userData) {
+        if (userData.password !== pass.value) {
+          // Invalid password
+          setErrorMessages({ name: "pass", message: errors.pass });
+        } else {
+          setIsSubmitted(true);
+        }
       } else {
-        setIsSubmitted(true);
+        // Username not found
+        setErrorMessages({ name: "uname", message: errors.uname });
       }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
-  };
+    };
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>

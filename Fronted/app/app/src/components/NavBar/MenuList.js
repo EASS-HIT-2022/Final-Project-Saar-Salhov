@@ -1,5 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 import homeLogo from '../images/logoWithNameNoBG.png'
+import React from 'react'
 import './NavBar.css'
 
 const MenuList = () => {
