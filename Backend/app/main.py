@@ -2,7 +2,8 @@ from ast import And, If
 from collections import UserList
 from email import message
 from typing import List
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
+from fastapi.middleware.cors import CORSMiddleware
 import time
 from matplotlib.pyplot import flag
 from pydantic import BaseModel, EmailStr
@@ -12,7 +13,25 @@ from Receipts import Receipts
 from user import User
 
 
+
 app = FastAPI()
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 usersList = []
 listOfReceipts = []
 
@@ -34,7 +53,7 @@ async def register(bUser: User):
     return message
 
 @app.put("/changePassword")
-async def changePassword(bUsername: str,bOldPass: str, bNewPass: str):
+async def changePassword(bUsername: str = Body(),bOldPass: str = Body(), bNewPass: str = Body()):
     flag = False
     isPassChanged = False
 
@@ -51,7 +70,7 @@ async def changePassword(bUsername: str,bOldPass: str, bNewPass: str):
         raise HTTPException(status_code=400, detail="The old password is incorrect")
 
 @app.post("/signIn")
-async def sighnIn(bUsername: str, bPassword: str):
+async def sighnIn(bUsername: str = Body(), bPassword: str = Body()):
     flag = False
 
     for user in usersList:
