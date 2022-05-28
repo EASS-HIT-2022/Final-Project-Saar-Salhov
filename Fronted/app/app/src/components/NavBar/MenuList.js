@@ -4,8 +4,17 @@ import React from 'react'
 import './NavBar.css'
 
 const MenuList = () => {
+
+  const onLogout = async (event) => {
+    localStorage.removeItem("username");
+    
+    window.location.reload();
+  };
+
+  const username = localStorage.getItem("username");
   return (
-    <>
+    !username? (
+      <>
       <nav>
       <Link to="/"><img src={homeLogo} className='nav-logo' alt="" /></Link>
         <ul className="nav-items">
@@ -29,6 +38,36 @@ const MenuList = () => {
 
       <Outlet />
     </>
+    ):
+    (
+      <>
+      <nav>
+      <Link to="/"><img src={homeLogo} className='nav-logo' alt="" /></Link>
+        <ul className="nav-items">
+        <li className="user">
+              Hello {username}
+          </li>
+          <li onClick={onLogout} className="logout">
+            Log-Out
+          </li>
+          <li>
+            <Link to="/About">About</Link>
+          </li>
+          <li>
+            <Link to="/Conatct">Conatct</Link>
+          </li>
+          <li>
+            <Link to="/Conatct">Upload Receipt</Link>
+          </li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Outlet />
+    </>
+    )
   )
 };
 

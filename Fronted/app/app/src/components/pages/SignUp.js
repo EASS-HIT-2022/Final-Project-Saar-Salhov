@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { Form } from "react-bootstrap";
 import './SignUp.css'
 
+const validEmailRegex = RegExp(
+  // eslint-disable-next-line
+  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+);
 
 async function createUserAPI(credentials) {
   console.log("before api signup")
-  return fetch("http://localhost:4040/users/signup", {
+  return fetch("http://localhost:8000/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,86 +20,188 @@ async function createUserAPI(credentials) {
     if (res.ok) {
       console.log("signup succeeded")
       return "success";
-    } else {
-      if (res.status===401)
+    } 
+    else {
+      // if (res.status===401)
+    //   {
+    //     return "Password is too weak or too short";
+    //   }
+    //   else if (res.status===402)
+    //   {
+    //     return "Email is not valid";
+    //   }
+    //   else if(res.status===403)
+    //   {
+    //     return "The username already exists";
+    //   }
+      if (res.status===404)
       {
-        return "Password is too weak or too short";
-      }
-      else if (res.status===402)
-      {
-        return "Email is not valid";
-      }
-      else if(res.status===403)
-      {
-        return "The username already exists";
-      }
-      else if (res.status===404)
-      {
-        return "The password is very common, change it";
+        return "The username allready exist";
       }
     }
   });
 }
 
 export default function SignUp() {
-      // React States
+  const [userEmail, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [userName, setUserName] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+
+
+  // Errors
+  const [errorEmail, setErrorEmail] = useState();
+  const [errorPassword, setErrorPassword] = useState();
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [text, setText] = useState();
 
-  var { fname, lname, mail, uname, pass } = document.forms[0];
+  // handele the change first name input
+  const handleChangeFirstName = async (event) => {
+    event.preventDefault();
+    setFirstName(event.target.value);
+  };
+
+  // handele the change last name input
+  const handleChangeLastName = async (event) => {
+    event.preventDefault();
+    setLastName(event.target.value);
+  };
+
+  // handele the change user name input
+  const handleChangeUserName = async (event) => {
+    event.preventDefault();
+    setUserName(event.target.value);
+  };
+
+  // handele the change email input
+  const handleChangeEmail = async (event) => {
+    event.preventDefault();
+    if (!event.target.value) 
+    {
+      setErrorEmail("Email is not valid!");
+    }
+    if (!validEmailRegex.test(event.target.value))
+      setErrorEmail("Email is not valid");
+    else {
+      setErrorEmail("");
+    }
+    setEmail(event.target.value);
+  };
+
+  // handele the change password input
+  const handleChangePassword = async (event) => {
+    event.preventDefault();
+    if (event.target.value.length < 5)
+      setErrorPassword("Password must be at least 5 characters long!");
+    else {
+      setErrorPassword("");
+   }
+    setPassword(event.target.value);
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submiting")
-        console.log("username", uname)
-        console.log("password", pass)
     var cred = {
-      firstName: fname,
-      lastName:lname,
-      email: mail,
-      username: uname.toLowerCase(),
-      password:pass
+      firstName: firstName.toLowerCase(),
+      lastName: lastName.toLowerCase(),
+      email: userEmail.toLowerCase(),
+      userName: userName,
+      password:password,
     }
-    const val = createUserAPI(cred);
-    if (val === "success") {
-      setIsSubmitted(true);
-    } else if (val==="Password is too weak or too short"){
-      setText("Password is too weak or too short");
-    }else if (val==="Email is not valid"){
-      setText("Email is not valid");
-    }else if (val==="The username already exists"){
-      setText("The username already exists");
-    }else if (val==="The password is very common, change it"){
-      setText("The password is very common, change it");
-    }};
-      
+    if ( errorEmail || errorPassword) {
+      setText("You can't submit!");
+      setIsSubmitted(false);
+    } else {
+        const val = await createUserAPI(cred);
+        if (val === "success") {
+          setText("User created successfully");
+          setEmail("");
+          setPassword("");
+          setFirstName("");
+          setLastName("");
+          setUserName("");
+          setErrorEmail("");
+          setErrorPassword("");
+          setIsSubmitted(true);
+        } else if (val==="Password is too weak or too short"){
+          setText("Password is too weak or too short");
+        }else if (val==="Email is not valid"){
+          setText("The Email" + JSON.stringify(userEmail) + " is not valid");
+          setIsSubmitted(false);
+        }else if (val==="The username allready exist"){
+          setText("The username " + JSON.stringify(userName) + " is already exists");
+          setIsSubmitted(false);
+        }else if (val==="The password is very common, change it"){
+          setText("The password is very common, change it");
+        }
+        // setEmail("");
+        // setPassword("");
+        // setFirstName("");
+        // setLastName("");
+        // setUserName("");
+        // setErrorEmail("");
+        // setErrorPassword("");
+      }
+    
+  };
+
+
+
     // JSX code for login form
 const renderForm = (
   <div className="form">
     <form onSubmit={handleSubmit}>
-    <div className="input-container">
+      {text}
+      <div className="input-container">
         <label>First name </label>
-        <input type="text" name="fname" required />
+        <input type="text"
+        value={firstName}
+        placeholder="Enter first name"
+        onChange={handleChangeFirstName}
+        required />
       </div>
       <div className="input-container">
         <label>Last name </label>
-        <input type="text" name="lname" required />
+        <input type="text"
+        value={lastName}
+        placeholder="Enter last name"
+        onChange={handleChangeLastName}
+        required />
       </div>
       <div className="input-container">
         <label>mail </label>
-        <input type="text" name="mail" required />
+        <input type="text"
+        value={userEmail}
+        placeholder="Enter Email"
+        required 
+        onChange={handleChangeEmail}/>
+        {errorEmail && <Form.Text className="error" >{errorEmail}</Form.Text>}
       </div>
       <div className="input-container">
         <label>Username </label>
-        <input type="text" name="uname" required />
+        <input type="text"
+        placeholder="Enter user name"
+        value={userName}
+        onChange={handleChangeUserName}
+        required />
       </div>
       <div className="input-container">
         <label>Password </label>
-        <input type="password" name="pass" required />
-        {/* {renderErrorMessage("pass")} */}
+        <input type="password"
+        placeholder="··········"
+        value={password}
+        onChange={handleChangePassword}
+        required
+         />
+        {errorPassword && (
+          <Form.Text className="error">{errorPassword}</Form.Text>
+        )}
       </div>
       <div className="button-container">
-        <input type="submit" />
+        <input type="submit" value="Send"/>
       </div>
     </form>
   </div>

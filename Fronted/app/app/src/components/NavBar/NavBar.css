@@ -16,6 +16,63 @@ nav {
 }
 
 .nav-items > li {
-    padding: 10px;
+
 }
+
+.nav-items > li > a {
+    float: left;
+    list-style: none;
+    text-align: center;
+    background-color: rgb(89, 81, 81);
+    margin-right: 15px;
+    width: 150px;
+    line-height: 30px;
+    text-decoration: none;
+    color: #FFFFFF;
+    display: block;
+    border-radius: 5px;
+}
+
+.nav-items > li > a:hover {
+    text-decoration: none;
+    color: #000000;
+    background-color: #c66a5e;
+}
+
+.user{
+    text-align: center;
+    float: left;
+    margin-right: 200px;
+    width: 150px;
+    line-height: 30px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    border-bottom: 2px solid #c66a5e;
+    border-radius: 5px;
+
+}
+
+.logout{
+    text-align: center;
+    float: left;
+    background-color: rgb(89, 81, 81);
+    margin-right: 50px;
+    width: 150px;
+    line-height: 30px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    text-decoration: none;
+    color: #FFFFFF;
+    display: block;
+    border-radius: 5px;
+}
+
+.logout:hover{
+    text-decoration: none;
+    color: #000000;
+    background-color: #c66a5e;
+}
+
 

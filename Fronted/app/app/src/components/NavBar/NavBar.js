@@ -10,7 +10,9 @@ import NoPage from '../pages/NoPage';
 
 
 export default function NavBar() {
-  return (
+  const username = localStorage.getItem("username");
+
+  const notLoggedIn = (
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<MenuList />}>
@@ -23,5 +25,25 @@ export default function NavBar() {
         <Route path="*" element={<NoPage />} />
     </Routes>
   </BrowserRouter>
+  );
+
+  const loggedIn = (
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<MenuList />}>
+        <Route index element={<Home />} />
+        <Route path="About" element={<About />} />
+        <Route path="Conatct" element={<Conatct />} />
+        <Route path="SignUp" element={<Home />} />
+        <Route path="logIn" element={<Home />} />
+        </Route>
+        <Route path="*" element={<NoPage />} />
+    </Routes>
+  </BrowserRouter>
+  );
+  return (
+    <div>
+      {username? loggedIn : notLoggedIn}
+    </div>
   )
 }
