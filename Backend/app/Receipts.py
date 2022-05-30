@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from product import Product
 
 class Receipts(BaseModel):
+    username: str
     storeName: str
     products: List[Product] = None
 
