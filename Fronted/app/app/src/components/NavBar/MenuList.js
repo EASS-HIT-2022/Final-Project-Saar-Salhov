@@ -57,7 +57,7 @@ const MenuList = () => {
             <Link to="/Conatct">Conatct</Link>
           </li>
           <li>
-            <Link to="/Conatct">Upload Receipt</Link>
+            <Link to="/UploadReceipt">Upload Receipt</Link>
           </li>
           <li>
             <Link to="/">Home</Link>
