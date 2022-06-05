@@ -81,6 +81,14 @@ async def sighnIn(bUsername: str = Body(), bPassword: str = Body()):
         raise HTTPException(status_code=400, detail="Username or password is incorrect")
     return message
 
+@app.get("/getAllmyReceipts")
+async def getAllReceipts(username: str):
+    receiptForSpecificUser = []
+    for receipt in listOfReceipts:
+        if username == receipt.username:
+            receiptForSpecificUser.append(receipt)
+    return {"message": receiptForSpecificUser}
+
 @app.get("/getAllReceipts")
 async def getAllReceipts():
     return {"message": listOfReceipts}
