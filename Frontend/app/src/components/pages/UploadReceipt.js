@@ -3,7 +3,7 @@ import "./UploadReceipt.css"
 
 async function uploadReceiptAPI(receipt) {
     console.log("before api signip")
-    return fetch("http://localhost:8000/uploadReceipt", {
+    return fetch("http://backend:8000/uploadReceipt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

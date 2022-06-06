@@ -17,12 +17,18 @@ from user import User
 app = FastAPI()
 
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
-    "http://localhost",
-    "http://localhost:8080",
     "http://localhost:3000",
-]
+    "http://localhost:8001",
+    "http://frontend:3000",
+    "http://frontend:8001",
+    "http://frontend:8000",
+    "http://frontend:8080",
+    "http://Frontend:3000",
+    "http://Frontend:8001",
+    "http://Frontend:8000",
+    "http://Frontend:8080",
+    "*"
+    ]
 
 app.add_middleware(
     CORSMiddleware,

@@ -3,7 +3,7 @@ import "./LogIn.css";
 
 async function loginUserAPI(credentials) {
   console.log("before api signip")
-  return fetch("http://localhost:8000/signIn", {
+  return fetch("http://backend:8000/signIn", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
