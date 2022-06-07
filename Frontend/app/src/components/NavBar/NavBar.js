@@ -9,6 +9,7 @@ import LogIn from '../pages/LogIn'
 import UploadReceipt from '../pages/UploadReceipt'
 import NoPage from '../pages/NoPage';
 import ContactUs from '../pages/ContactUs';
+import ChangePass from '../pages/ChangePass'
 
 
 export default function NavBar() {
@@ -34,6 +35,7 @@ export default function NavBar() {
     <Routes>
       <Route path="/" element={<MenuList />}>
         <Route index element={<Home />} />
+        <Route path="ChangePass" element={<ChangePass />} />
         <Route path="UploadReceipt" element={<UploadReceipt />} />
         <Route path="ContactUs" element={<ContactUs />} />
         <Route path="About" element={<About />} />
