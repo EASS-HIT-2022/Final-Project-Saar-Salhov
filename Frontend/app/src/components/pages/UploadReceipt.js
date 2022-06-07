@@ -41,7 +41,7 @@ const handleSubmit = async (event) => {
     event.preventDefault();
     var receipt = {
         date : purchaseDate,
-        username: localStorage.getItem(""),
+        username: localStorage.getItem("username"),
         storeName: storeName,
         products:inputList,
     }
@@ -53,6 +53,8 @@ const handleSubmit = async (event) => {
         setStoreName("");
     }
     else{
+        setPurchaseDate("");
+        setStoreName("");
         setInputList([{ name: "", color: "", price: "" }]);
     }
 
