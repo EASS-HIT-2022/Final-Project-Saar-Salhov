@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link  } from "react-router-dom";
 import homeLogo from '../images/logoWithNameNoBG.png'
 import React from 'react'
 import './NavBar.css'
@@ -6,6 +6,7 @@ import './NavBar.css'
 const MenuList = () => {
 
   const onLogout = async (event) => {
+    
     localStorage.removeItem("username");
     
     window.location.reload();
@@ -48,7 +49,7 @@ const MenuList = () => {
               Hello {username}
           </li>
           <li onClick={onLogout} className="logout">
-            Log-Out
+            <Link to="/">Log-Out</Link>
           </li>
           <li>
             <Link to="/ContactUs">Conatct us</Link>
