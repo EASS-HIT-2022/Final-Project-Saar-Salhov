@@ -23,9 +23,6 @@ const MenuList = () => {
             <Link to="/ContactUs">Conatct us</Link>
           </li>
           <li>
-            <Link to="/About">About</Link>
-          </li>
-          <li>
             <Link to="/SignUp">Register</Link>
           </li>
           <li>
@@ -53,9 +50,6 @@ const MenuList = () => {
           </li>
           <li>
             <Link to="/ContactUs">Conatct us</Link>
-          </li>
-          <li>
-            <Link to="/About">About</Link>
           </li>
           <li>
             <Link to="/Receipts">Receipts</Link>

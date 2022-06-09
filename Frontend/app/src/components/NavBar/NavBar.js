@@ -20,7 +20,6 @@ export default function NavBar() {
     <Routes>
       <Route path="/" element={<MenuList />}>
         <Route index element={<Home />} />
-        <Route path="About" element={<About />} />
         <Route path="ContactUs" element={<ContactUs />} />
         <Route path="SignUp" element={<SignUp />} />
         <Route path="logIn" element={<LogIn />} />
@@ -38,7 +37,6 @@ export default function NavBar() {
         <Route path="ChangePass" element={<ChangePass />} />
         <Route path="UploadReceipt" element={<UploadReceipt />} />
         <Route path="ContactUs" element={<ContactUs />} />
-        <Route path="About" element={<About />} />
         <Route path="Receipts" element={<Receipts />} />
         <Route path="logIn" element={<Home />} />
         </Route>
