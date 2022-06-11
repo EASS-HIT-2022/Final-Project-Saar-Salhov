@@ -10,5 +10,13 @@ services:
     ports:
       - "8001:3000"
     container_name: frontend
-
-
+  dbmysql:
+    image: mysql
+    ports:
+      - "8002:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - type: bind
+        source: ./MySql/data/db
+        target: /var/lib/mysql
