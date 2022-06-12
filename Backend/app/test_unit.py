@@ -1,7 +1,5 @@
 from wsgiref import headers
 from fastapi.testclient import TestClient
-from httplib2 import Credentials
-from pytest import TestReport
 from main import app
 
 import json
