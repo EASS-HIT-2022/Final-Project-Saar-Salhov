@@ -3,3 +3,4 @@ pydantic
 uvicorn[standard]
 pydantic[email]
 matplotlib
+mysql-connector-python

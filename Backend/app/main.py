@@ -11,6 +11,8 @@ import uvicorn
 from product import Product
 from Receipts import Receipts
 from user import User
+from mysqlConnector import con
+ 
 
 
 
