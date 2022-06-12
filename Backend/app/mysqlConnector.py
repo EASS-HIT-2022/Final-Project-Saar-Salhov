@@ -2,10 +2,19 @@ import mysql.connector
 from mysql.connector import Error
 
 
-def GetConnection():
+def connect():
+    """ Connect to MySQL database """
+    conn = None
     try:
-        connection = mysql.connector.connect(host='localhost', port='8002',database='receipts',user='root',password='root')
+        conn = mysql.connector.connect(host='localhost',port='8002', database='receipts', user='root', password='root')
+        if conn.is_connected():
+            print('Connected to MySQL database')
     except Error as e:
-        print("Error while connecting to MySQL", e)
+        print(e)
     finally:
-        return connection
+        if conn is not None and conn.is_connected():
+            return conn
+
+
+if __name__ == '__main__':
+    connect()
