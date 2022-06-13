@@ -4,6 +4,10 @@ services:
     build: MySql/
     ports:
       - "8002:3306"
+  dbmongo:
+    build: Mongo/
+    ports:
+      - "8003:27017"
   backend:
     build: Backend/
     ports:

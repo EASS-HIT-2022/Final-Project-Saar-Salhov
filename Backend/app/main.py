@@ -5,6 +5,7 @@ from Receipts import Receipts
 from user import User
 import mysqlConnector
 import json
+import mongoDbConnector
  
 
 app = FastAPI()
@@ -12,6 +13,7 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
     "http://localhost:8001",
+    "http://localhost:7000",
     "http://frontend:3000",
     "http://frontend:8001",
     "http://frontend:8000",
@@ -110,7 +112,6 @@ async def sighnIn(bUsername: str = Body(default="string"), bPassword: str = Body
 
     cursor = con.cursor()
     cursor.execute(selectAllUsers,val)
-    print(bUsername)
     
     for (userName, password) in cursor:
         if userName == bUsername and password == bPassword:
@@ -124,19 +125,28 @@ async def sighnIn(bUsername: str = Body(default="string"), bPassword: str = Body
 
 @app.get("/getAllmyReceipts")
 async def getAllReceipts(username: str):
+    con = mongoDbConnector.connect()
     receiptForSpecificUser = []
-    for receipt in listOfReceipts:
-        if username == receipt.username:
-            receiptForSpecificUser.append(receipt)
+
+    for receipt in con.find({"username": username},{'_id':0}):
+        receiptForSpecificUser.append(receipt)
+
     return {"message": receiptForSpecificUser}
 
 @app.get("/getAllReceipts")
 async def getAllReceipts():
+    listOfReceipts = []
+    con = mongoDbConnector.connect()
+
+    for receipt in con.find({},{'_id':0}):
+        listOfReceipts.append(receipt)
+
     return {"message": listOfReceipts}
 
 @app.post("/uploadReceipt")
 async def uploadReceipt(bReceipt: Receipts):
-    listOfReceipts.append(bReceipt)
+    con = mongoDbConnector.connect()
+    con.insert_one(json.loads(bReceipt.json())).inserted_id
     return {"message": "The recieipt uploaded successfully"}
 
 

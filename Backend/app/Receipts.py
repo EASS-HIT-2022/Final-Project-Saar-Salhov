@@ -13,4 +13,3 @@ class Receipts(BaseModel):
     products: List[Product] = None
 
 
-
