@@ -13,9 +13,9 @@
 * Docker-compose
 
 ## How To Run:
-### Backend + Frontend:
+### Backend + Frontend + Mongo + MySql:
 please download the repository to your pc.
-To run the Backend and the frontend together please get inside "Final-Project-Saar-Salhov" directory using `cd` and run this command in the shell:
+To run the entire app please get inside "Final-Project-Saar-Salhov" directory using `cd` and run this command in the shell:
 
 ```bash
 docker-compose up
@@ -32,6 +32,14 @@ Also we can see that our frontend is running on the localhost in port 8001, you 
 After clicking on the link you will see this page:
 
 ![image](https://user-images.githubusercontent.com/86562519/172903581-ce01bf4b-7f5a-462e-947a-d75e30c662ab.png)
+
+In addition, we can see that our DB's Mongo and MySql running on ports 8003 and 8002.
+
+This is the output you should get when running the comman `docker ps`:
+
+![image](https://user-images.githubusercontent.com/86562519/176252930-e112dc8e-d215-482d-972a-d558ba89cdea.png)
+
+All the users saved In MySql, and all the receipts saved in Mongo.
 
 ## Tests - Backend
 To run tests nevigate to Backend/app directory using `cd` command in your shell, and run `pytest`.
