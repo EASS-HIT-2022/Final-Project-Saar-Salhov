@@ -1,6 +1,8 @@
 # Final Project Saar Salhov
 
 ### My system will save receipts of users by store. the system is running on micro-services in Docker.
+## Short video of my project
+https://youtu.be/DePas4HnWJQ
 
 ## Design
 ![image](https://user-images.githubusercontent.com/86562519/176251856-72b6eadd-d73c-40df-b587-68595f2a00a6.png)
