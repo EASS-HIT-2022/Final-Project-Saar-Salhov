@@ -3,8 +3,7 @@
 ### My system will save receipts of users by store. the system is running on micro-services in Docker.
 
 ## Design
-![image](https://user-images.githubusercontent.com/86562519/165363837-bc4a7cd4-b66b-47af-8739-30ab9a1615d1.png)
-
+![image](https://user-images.githubusercontent.com/86562519/176251856-72b6eadd-d73c-40df-b587-68595f2a00a6.png)
 ## Prerequisites
 
 * Linux OS
